@@ -1,0 +1,17 @@
+{
+  "name": "puppeter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --forceExit --detectOpenHandles"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^29.7.0",
+    "pupeteer": "^0.0.1",
+    "puppeteer": "^21.3.5"
+  }
+}
