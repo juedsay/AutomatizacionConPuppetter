@@ -14,20 +14,27 @@ npm i puppeteer jest
 ## Usage
 
 ```sh
-En el “package.json” modificar:&#34;scripts&#34;: {
+
+Antes de empezar a utilizar recomiendo en el “package.json” modificar:
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+ }
+Por
+"scripts": {
+    "test": "jest --forceExit --detectOpenHandles"
+}
 ```
 
 ## Run tests
 
 ```sh
-    &#34;test&#34;: &#34;echo \&#34;Error: no test specified\&#34; && exit 1&#34;
+    npm run test
 ```
 
 ## Author
 
 👤 **Julián E. Simón**
 
-* Website: https://www.linkedin.com/in/juedsay/
 * Github: [@juedsay](https://github.com/juedsay)
 * LinkedIn: [@https:\/\/www.linkedin.com\/in\/juedsay\/](https://linkedin.com/in/https:\/\/www.linkedin.com\/in\/juedsay\/)
 
@@ -40,7 +47,3 @@ Feel free to check [issues page](https://github.com/juedsay/AutomatizacionConPup
 ## Show your support
 
 Give a ⭐️ if this project helped you!
-
-
-***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
