@@ -2,7 +2,6 @@ const puppeteer = require('puppeteer')
 
 describe('Extrayendo informacion',()=> { //Función que recibe un callback
 
-    //<<<<<<<DE LA CLASE DE HOOKS>>>>>>>>
     //Creo dos varibles globales:
     let browser
     let page
@@ -39,7 +38,6 @@ describe('Extrayendo informacion',()=> { //Función que recibe un callback
         await browser.close()
     })
     //Incluso si se accede a la misma web se puede quitar el método de page.goto repetido para ahorrar código
-    //<<<<<<<<------------>>>>>>>>>>>>>>>
 
     it('Extraer el titulo de la pagina y la url', async() =>{ //Es una función asincrona porque necesito esperar a que se abra el navegador
        await page.goto('https://www.github.com', {waitUntil : 'networkidle0'})
