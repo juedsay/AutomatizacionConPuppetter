@@ -5,7 +5,7 @@ describe('Interactuando con elementos',()=> {
 
     it('Debe abrir y cerrar el navegador', async() =>{ 
         const browser = await puppeteer.launch({
-            headless: false, 
+            headless: true, 
             defaultViewport: null,
 
         })
