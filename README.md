@@ -9,6 +9,8 @@
 
 ```sh
 npm i puppeteer jest
+
+npm i jest-image-snapshot
 ```
 
 ## Usage
