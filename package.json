@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --forceExit --detectOpenHandles",
-    "visual-test": "jest --updateSnapshot --forceExit --detectOpenHandles __tests__/visual.test.js"
+    "visual-test": "jest --updateSnapshot --forceExit --detectOpenHandles __tests__/visual.test.js",
+    "pdf-test": "jest --forceExit --detectOpenHandles __tests__/generacionPDF.test.js"
   },
   "keywords": [],
   "author": "",
