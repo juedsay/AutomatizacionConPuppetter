@@ -7,7 +7,8 @@
     "test": "jest --forceExit --detectOpenHandles",
     "visual-test": "jest --updateSnapshot --forceExit --detectOpenHandles __tests__/visual.test.js",
     "pdf-test": "jest --forceExit --detectOpenHandles __tests__/generacionPDF.test.js",
-    "accesibilidad-test": "jest --forceExit --detectOpenHandles __tests__/accesibilidad.test.js"
+    "accesibilidad-test": "jest --forceExit --detectOpenHandles __tests__/accesibilidad.test.js",
+    "firefox-test": "jest --forceExit --detectOpenHandles __tests__/firefox.test.js"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +18,6 @@
     "jest": "^29.7.0",
     "jest-image-snapshot": "^6.2.0",
     "pupeteer": "^0.0.1",
-    "puppeteer": "^21.3.5"
+    "puppeteer": "^21.3.6"
   }
 }
