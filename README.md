@@ -38,7 +38,7 @@ Por
 👤 **Julián E. Simón**
 
 * Github: [@juedsay](https://github.com/juedsay)
-* LinkedIn: [@https:\/\/www.linkedin.com\/in\/juedsay\/](https://linkedin.com/in/https:\/\/www.linkedin.com\/in\/juedsay\/)
+* LinkedIn: [@https:\/\/www.linkedin.com\/in\/juedsay\/](https:\/\/www.linkedin.com\/in\/juedsay\/)
 
 ## 🤝 Contributing
 
