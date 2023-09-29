@@ -8,7 +8,7 @@ describe('Performance',()=> {
    
     beforeAll(async()=>{
         browser = await puppeteer.launch({
-            headless: true, 
+            headless: false, 
             defaultViewport: null,
             //slowMo: 500
         })
@@ -68,8 +68,7 @@ describe('Performance',()=> {
             x.cat === 'disabled-by-default-devtools.screenshot' && //accedemos a las propiedades que sean .cat. La propiedad escrita entre '' se escribe tal cual
             x.name === 'Screenshot' &&
             typeof x.args !== 'undefined' &&
-            typeof x.args.snapshot !== 'undefined' //Propiedad interna de args
-        
+            typeof x.args.snapshot !== 'undefined' //Propiedad interna de args        
             
         )
         //Iterar sobre este arreglo para crear las imagenes:
@@ -82,7 +81,45 @@ describe('Performance',()=> {
         })
     })         
 
-    }, 35000)   
+    }, 35000) 
+    
+    //<<<<<<<<<<<<<<<<<<<<------------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>
+    //First contentful paint:
+    
+
+    test('Medir el performance del first paint y irst contentful paint', async() =>{ 
+        const navigationPromise = page.waitForNavigation()
+        await page.goto('https://ualki.com/es')
+        await navigationPromise
+
+        const firstPaint = JSON.parse(
+            await page.evaluate(()=> JSON.stringify(performance.getEntriesByName('first-paint')))
+        )
+
+        const firsContentfulPaint = JSON.parse(
+            await page.evaluate(()=> JSON.stringify(performance.getEntriesByName('first-contentful-paint')))
+        )
+
+        // console.log('firstPaint',firstPaint)
+        // console.log('firsContentfulPaint',firsContentfulPaint)
+
+        /*Otra manera de hacerlo: Se pueden hacer spect o asserttions 
+        para determinar si se esperan que los tiempos sean muy altos o muy bajos, según los requerimientos de la prueba.*/
+        console.log('firstPaint',firstPaint[0].startTime)
+        console.log('firsContentfulPaint',firsContentfulPaint[0].startTime)
+           
+
+    }, 35000)
+
+    test('Medir el performance de los frames por segundo', async() =>{ 
+        
+        const devtoolsProtocolClient = await page.target().createCDPSession()
+        await devtoolsProtocolClient.send('Overlay.setShowFPSCounter', { show: true })
+        await page.goto('https://ualki.com/es')
+
+        await page.screenshot({ path:'framesPorSegundo.jpg', type: 'jpeg' })           
+
+    }, 35000)    
 
 
 })
