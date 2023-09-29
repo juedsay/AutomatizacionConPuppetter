@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer')
-const fs = require('fs')
+const fs = require('fs') //Importo la Librería fs que me servirá para generar los archivos de las imágenes
 
 describe('Performance',()=> { 
 
@@ -14,9 +14,7 @@ describe('Performance',()=> {
         })
         
         page = await browser.newPage()
-        await page.goto('https://ualki.com/es')
-       
-        
+
     },10000)
     afterAll(async()=>{
         await browser.close()
@@ -24,16 +22,16 @@ describe('Performance',()=> {
     
 
     test('Medir el performance de la automatizacion', async() =>{ 
-    
+        
+        await page.goto('https://ualki.com/es')
         await page.waitForSelector('img')
         const metrics = await page.metrics()
-        console.log(metrics)
-         
+        console.log(metrics)        
 
     }, 35000)
 
     // test('Medir el performance de la pagina', async() =>{ 
-    
+        // await page.goto('https://ualki.com/es')
     //     await page.waitForSelector('img')
     //     const metrics2 = await page.evaluate(()=> JSON.stringify(window.performance)) //Hago que me convierta la cadena de los resultados en un JSON, y accedo a los elemtos del navedor, en éste caso a la ventana
     //     console.log(metrics2)
@@ -41,24 +39,29 @@ describe('Performance',()=> {
 
     // }, 35000)
 
+    test('Debera medir el perfomance del page load', async () => {
+
+		await page.tracing.start({ path: 'profile.json' })
+		await page.goto('https://ualki.com/es')
+		await page.tracing.stop()
+
+	}, 35000)
+
     test('Medir el performance del page load con screeshots', async() =>{ 
     
-        await page.tracing.start({ path: 'profile.json ' , screenshots: true})//Me permite empezar, escuchar todos los eventos que se realicen
+        await page.tracing.start({ path: 'profile.json', screenshots: true})//Me permite empezar, escuchar todos los eventos que se realicen
         await page.goto('https://ualki.com/es')
-        await page.waitForSelector('img')
-        await page.tracing.stop()
-         
+        await page.tracing.stop()         
 
     }, 35000)
 
     test('Medir el performance del page load con screeshots y extrayendolos', async() =>{ 
     
-        await page.tracing.start({ path: 'profile.json ' , screenshots: true})//Me permite empezar, escuchar todos los eventos que se realicen
+        await page.tracing.start({ path: 'profile.json', screenshots: true})//Me permite empezar, escuchar todos los eventos que se realicen
         await page.goto('https://ualki.com/es')
-        await page.waitForSelector('img')
         await page.tracing.stop()
 
-        const tracing = JSON.parse(fs.readFileSync('../profile.json', 'utf8')) //Extrae data del Profile .json
+        const tracing = JSON.parse(fs.readFileSync('./profile.json', 'utf8')) //Extrae data del Profile .json
         //Filtrar el JSON
         const traceScreenShots = tracing.traceEvents.filter( //Se crea una variable donde se va a filtrar
              (x)=> //Generamos la función para mapear el filtro:
@@ -72,19 +75,14 @@ describe('Performance',()=> {
         //Iterar sobre este arreglo para crear las imagenes:
 
         traceScreenShots.forEach(function(snap, index){
-            fs.writeFile(`trace-screeshot-${index}.png`,snap.args.snapshot, 'base64', funtion(err))//Paso las propiedades que quiero que tengan los archivos cuando vaya iterando el arreglo
+            fs.writeFile(`trace-screeshot-${index}.png`, snap.args.snapshot, 'base64', function(err){//Paso las propiedades que quiero que tengan los archivos cuando vaya iterando el arreglo
             if(err){ //Si se produce un error que mensaje quiero que se muestre por consola
                 console.log('No se pudo crear el archivo', err)
             }
         })
-         
+    })         
 
-    }, 35000)
-
-
-
-
-    
+    }, 35000)   
 
 
 })
